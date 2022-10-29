@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 聒聒號是模板語言 -->
+        <p>{{count}}</p>
+        <p>{{array.length}}</p>
+        <h5>{{name}}{{fuck}}</h5>
+        <h3>{{obj}}</h3>
+        <h5>{{talk ? '好' : '不好'}}</h5>
+    </div>
+
+    <!-- 引入vue -->
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+
+        // 新增一個應用並建立Vue
+
+        Vue.createApp({
+            data(){
+                return{
+                    talk: true,
+                    count:1,
+                    name:'哭哭',
+                    fuck:'貓咪',
+                    array:['1','2','3'],
+                    obj:{name:'566'},
+                }
+            }
+        }).mount('#app');/* 最後mount進去app中 */
+    </script>
+</body>
+</html>
