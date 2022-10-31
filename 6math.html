@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1</title>
+</head>
+<style>
+    *{
+        /* outline: solid 1px; */
+    }
+    .page{
+        display: flex;
+        flex-wrap: wrap;
+        box-sizing: border-box;
+        padding: 10px;
+        border: solid 1px;
+        width: 300px;
+    }
+    .moni{
+        width: 100%;
+    }
+    input{
+        width: 100%;
+        box-sizing: border-box;
+        margin-bottom: 5px;
+    }
+    .number{
+        width: 70%;
+    }
+    .calc{
+        width: 30%;
+    }
+    .calc button{
+        width: 100%;
+    }
+    .number button {
+        width: 33.333333%;
+    }
+</style>
+<body>
+    <div id="app">
+        <h1>{{title}}</h1>
+
+        <div class="page">
+            <div class="moni">
+                <input type="text" v-model="count">
+            </div>
+            <div class="number">
+                <button v-for="number in 9" @click="choose(number)">{{number}}</button>
+                <button>0</button>
+                <button @click="clear">=</button>
+                <button @click="clear">C</button>
+            </div>
+            <div class="calc">
+                <button @click="plus">+</button>
+                <button>-</button>
+                <button>x</button>
+                <button>/</button>
+            </div>
+        </div>
+        <p>總和:{{total}}</p>
+
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        let a=0;
+        Vue.createApp({
+            data(){
+                return{
+                    count:"",
+                    title:'計算機',
+                    total:0,
+                }
+            },
+            methods:{
+                choose(number){
+                    this.count += number;
+                },
+                plus(){
+                    a = this.count
+                    this.count = '';
+                    condole.log(a);                 
+                    
+                },
+                clear(){
+                    this.count="";
+                },
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>
