@@ -50,7 +50,7 @@
             <div class="number">
                 <button v-for="number in 9" @click="choose(number)">{{number}}</button>
                 <button>0</button>
-                <button @click="clear">=</button>
+                <button @click="equal">=</button>
                 <button @click="clear">C</button>
             </div>
             <div class="calc">
@@ -67,23 +67,26 @@
     <script src="https://unpkg.com/vue@next"></script>
     <script>
         let a=0;
+        function qqpr(a,b){
+            return a+b;
+        }
         Vue.createApp({
             data(){
                 return{
                     count:"",
                     title:'計算機',
                     total:0,
+                    kkbox:[],
                 }
             },
             methods:{
                 choose(number){
                     this.count += number;
                 },
-                plus(){
-                    a = this.count
-                    this.count = '';
-                    condole.log(a);                 
+                plus(){           
                     
+                },
+                equal(){
                 },
                 clear(){
                     this.count="";
