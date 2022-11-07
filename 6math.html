@@ -55,7 +55,7 @@
             </div>
             <div class="calc">
                 <button @click="plus">+</button>
-                <button>-</button>
+                <button @click="minus">-</button>
                 <button>x</button>
                 <button>/</button>
             </div>
@@ -68,38 +68,67 @@
     <script>
 
         let a=0;
+        let b=0;
         let eq= [];
+        let qe= [];
         let sum=0;
 
         Vue.createApp({
             data(){
                 return{
-                    count:"",
+                    count:"0",
                     title:'計算機',
                     total:sum,
                     opa:"",
                     kkbox:[],
+                    whi:"",
                 }
             },
             methods:{
                 choose(number){
+                    this.count = "";
                     this.count += number;
                 },
                 plus(){
                     prevent = this.count;       
                     this.count = "";
                     eq.push(prevent);
+                    whi="+";
+                },
+                minus(){     
+                    this.count = "";
+                    whi="-";
                 },
                 equal(){
-                    prevent = this.count;
-                    this.count = "";
-                    eq.push(prevent);
-                    eq.forEach(i => {
-                        a += parseInt(i);
-                    });
-                    this.count = "0";
-                    this.total = a;
-                    a = 0;
+                    if(whi == "+"){
+                        prevent = this.count;
+                        this.count = "";
+                        eq.push(prevent);
+                        eq.forEach(i => {
+                            a += parseInt(i);
+                        });
+                        this.count = "0";
+                        this.total = a;
+                        // total = a;
+                        a = 0;
+                    }
+                    if(whi == "-"){
+                        brevent = this.count;
+                        this.count = "";
+                        qe.push(brevent);
+                        qe.forEach(i => {
+                            b += parseInt(i);
+                        });
+                        eq.forEach(i => {
+                            a += parseInt(i);
+                        });
+
+                        this.count = "0";
+                        this.total = a - b;
+                        // total = a - b;
+                        a = 0;
+                        b = 0;
+                    }
                     
                 },
                 clear(){
