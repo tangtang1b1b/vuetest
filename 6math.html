@@ -66,7 +66,10 @@
 
     <script src="https://unpkg.com/vue@next"></script>
     <script>
+
         let a=0;
+        let  eq= [];
+        
         function qqpr(a,b){
             return a+b;
         }
@@ -76,6 +79,7 @@
                     count:"",
                     title:'計算機',
                     total:0,
+                    opa:"",
                     kkbox:[],
                 }
             },
@@ -84,9 +88,20 @@
                     this.count += number;
                 },
                 plus(){           
-                    
+                    prevent = this.count;
+                    this.count = "";
+                    eq.push(prevent);
+                    // eq.push("+");
                 },
                 equal(){
+                    prevent = this.count;
+                    this.count = "";
+                    eq.push(prevent);
+                    eq.forEach(i => {
+                        a += parseInt(i);
+                    });
+                    this.count = a;
+
                 },
                 clear(){
                     this.count="";
