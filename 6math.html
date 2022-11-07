@@ -68,17 +68,15 @@
     <script>
 
         let a=0;
-        let  eq= [];
-        
-        function qqpr(a,b){
-            return a+b;
-        }
+        let eq= [];
+        let sum=0;
+
         Vue.createApp({
             data(){
                 return{
                     count:"",
                     title:'計算機',
-                    total:0,
+                    total:sum,
                     opa:"",
                     kkbox:[],
                 }
@@ -87,11 +85,10 @@
                 choose(number){
                     this.count += number;
                 },
-                plus(){           
-                    prevent = this.count;
+                plus(){
+                    prevent = this.count;       
                     this.count = "";
                     eq.push(prevent);
-                    // eq.push("+");
                 },
                 equal(){
                     prevent = this.count;
@@ -100,11 +97,16 @@
                     eq.forEach(i => {
                         a += parseInt(i);
                     });
-                    this.count = a;
-
+                    this.count = "0";
+                    this.total = a;
+                    a = 0;
+                    
                 },
                 clear(){
                     this.count="";
+                    prevent = "";
+                    eq = [];
+                    a = 0;
                 },
             }
         }).mount('#app');
