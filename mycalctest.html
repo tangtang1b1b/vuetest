@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>天下第一武道館</title>
+</head>
+<style>
+    *{
+        /* outline: solid 1px; */
+    }
+    .page{
+        display: flex;
+        flex-wrap: wrap;
+        box-sizing: border-box;
+        padding: 10px;
+        border: solid 1px;
+        width: 300px;
+    }
+    .moni{
+        width: 100%;
+    }
+    input{
+        width: 100%;
+        box-sizing: border-box;
+        margin-bottom: 5px;
+    }
+    .number{
+        width: 70%;
+    }
+    .calc{
+        width: 30%;
+    }
+    .calc button{
+        width: 100%;
+    }
+    .number button {
+        width: 33.333333%;
+    }
+</style>
+<body>
+    <div id="app">
+        <h1>{{title}}</h1>
+
+        <div class="page">
+            <div class="moni">
+                <input type="text" v-model="count">
+            </div>
+            <div class="number">
+                <button v-for="number in 9" @click="choose(number)">{{number}}</button>
+                <button>0</button>
+                <button @click="equal">=</button>
+                <button >C</button>
+            </div>
+            <div class="calc">
+                <button @click="nigga('+')">+</button>
+                <button @click="nigga('-')">-</button>
+                <button @click="nigga('x')">x</button>
+                <button @click="nigga('/')">/</button>
+            </div>
+        </div>
+        <p>總和:{{total}}</p>
+
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        // let eq = ['1', '+', '2', '+', '3'];
+        let b =0;
+        Vue.createApp({
+            data(){
+                return{
+                    count:"0",
+                    title:'計算機',
+                    total:0,
+                }
+            },
+            methods:{
+                choose(number){
+                    if(this.count == "0"){
+                        this.count ="";
+                    }
+                    this.count += number;
+                },
+                calc(){
+                    [...this.count].split()
+                },
+                equal(){
+                    let eq = [...this.count];
+                    eq = eq.toString().split(',+,');
+                    eq.forEach(i=>b += parseInt(i));
+                    this.count = b
+                    // console.log(b)
+                    // this.count = parseInt()
+                },
+                nigga(which){
+                    this.count += which;
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>
