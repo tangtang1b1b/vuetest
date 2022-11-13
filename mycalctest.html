@@ -67,36 +67,79 @@
     <script src="https://unpkg.com/vue@next"></script>
     <script>
         // let eq = ['1', '+', '2', '+', '3'];
-        let b =0;
         Vue.createApp({
             data(){
                 return{
                     count:"0",
                     title:'計算機',
                     total:0,
+                    operatorclicked: false,
                 }
             },
-            methods:{
+            // methods:{
+            //     choose(number){
+            //         if(this.count == "0"){
+            //             this.count ="";
+            //         }
+            //         this.count += number;
+            //     },
+            //     data(){
+            //     return {
+            //         keyin: ''
+            //     }
+            // },
+            methods: {
                 choose(number){
-                    if(this.count == "0"){
-                        this.count ="";
+                    if(this.operatorClicked){
+                        this.keyin = "";
+                        this.operatorClicked = false;
                     }
-                    this.count += number;
+                    this.keyin = `${this.keyin}${num}`;
                 },
-                calc(){
-                    [...this.count].split()
+                dot(){
+                    if(this.keyin.indexOf('.') === -1){
+                        this.append('.');
+                    }
+                },
+                setPrevious(){
+                    this.previous = this.keyin;
+                    this.operatorClicked = true;
+                },
+                plus(){
+                    this.operator = (a, b) => a + b;
+                    this.setPrevious();
+                },
+                minus(){
+                    this.operator = (a, b) => b - a;
+                    this.setPrevious();
+                },
+                multiply(){
+                    this.operator = (a, b) => a * b;
+                    this.setPrevious();
+                },
+                divide(){
+                    this.operator = (a, b) => b / a;
+                    this.setPrevious();
                 },
                 equal(){
-                    let eq = [...this.count];
-                    eq = eq.toString().split(',+,');
-                    eq.forEach(i=>b += parseInt(i));
-                    this.count = b
-                    // console.log(b)
-                    // this.count = parseInt()
+                    this.keyin = `${this.operator(
+                    parseFloat(this.keyin), 
+                    parseFloat(this.previous)
+                    )}`;
+                    this.previous = null;
                 },
-                nigga(which){
-                    this.count += which;
-                }
+                clear(){
+                    this.keyin ="";
+                },
+                negative(){
+                    this.keyin = this.keyin.charAt(0) === '-' ? 
+                    this.keyin.slice(1) : `-${this.keyin}`;
+                },
+                percent(){
+                    this.keyin = `${parseFloat(this.keyin)/100}`
+                },
+            }
+
             }
         }).mount('#app');
     </script>
