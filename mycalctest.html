@@ -45,61 +45,44 @@
 
         <div class="page">
             <div class="moni">
-                <input type="text" v-model="count">
+                <input type="text" v-model="keyin">
             </div>
             <div class="number">
                 <button v-for="number in 9" @click="choose(number)">{{number}}</button>
-                <button>0</button>
+                <button @click="choose(0)">0</button>
                 <button @click="equal">=</button>
-                <button >C</button>
+                <button @click="clear">C</button>
             </div>
             <div class="calc">
-                <button @click="nigga('+')">+</button>
-                <button @click="nigga('-')">-</button>
-                <button @click="nigga('x')">x</button>
-                <button @click="nigga('/')">/</button>
+                <button @click="plus">+</button>
+                <button @click="minus">-</button>
+                <button @click="multiply">x</button>
+                <button @click="divide">/</button>
             </div>
         </div>
-        <p>總和:{{total}}</p>
+        <p>總和:{{keyin}}</p>
 
     </div>
 
     <script src="https://unpkg.com/vue@next"></script>
     <script>
         // let eq = ['1', '+', '2', '+', '3'];
+        // let b =0;
         Vue.createApp({
             data(){
-                return{
-                    count:"0",
-                    title:'計算機',
-                    total:0,
-                    operatorclicked: false,
+                return {
+                    count:'',
+                    keyin: '0',
+                    operatorClicked: false,
                 }
             },
-            // methods:{
-            //     choose(number){
-            //         if(this.count == "0"){
-            //             this.count ="";
-            //         }
-            //         this.count += number;
-            //     },
-            //     data(){
-            //     return {
-            //         keyin: ''
-            //     }
-            // },
             methods: {
                 choose(number){
                     if(this.operatorClicked){
                         this.keyin = "";
                         this.operatorClicked = false;
                     }
-                    this.keyin = `${this.keyin}${num}`;
-                },
-                dot(){
-                    if(this.keyin.indexOf('.') === -1){
-                        this.append('.');
-                    }
+                    this.keyin = this.keyin == "0"?`${number}`:`${this.keyin}${number}`;
                 },
                 setPrevious(){
                     this.previous = this.keyin;
@@ -110,7 +93,7 @@
                     this.setPrevious();
                 },
                 minus(){
-                    this.operator = (a, b) => b - a;
+                    this.operator = (a, b) => a - b;
                     this.setPrevious();
                 },
                 multiply(){
@@ -118,30 +101,19 @@
                     this.setPrevious();
                 },
                 divide(){
-                    this.operator = (a, b) => b / a;
+                    this.operator = (a, b) => a / b;
                     this.setPrevious();
                 },
                 equal(){
-                    this.keyin = `${this.operator(
-                    parseFloat(this.keyin), 
-                    parseFloat(this.previous)
-                    )}`;
+                    this.keyin = `${this.operator(parseFloat(this.previous),parseFloat(this.keyin))}`;
                     this.previous = null;
                 },
                 clear(){
                     this.keyin ="";
                 },
-                negative(){
-                    this.keyin = this.keyin.charAt(0) === '-' ? 
-                    this.keyin.slice(1) : `-${this.keyin}`;
-                },
-                percent(){
-                    this.keyin = `${parseFloat(this.keyin)/100}`
-                },
             }
-
-            }
-        }).mount('#app');
+        }).mount("#app")
+    </script>
     </script>
 </body>
 </html>
