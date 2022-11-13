@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        outline: solid 1px;
+        color: #fff;
+    }
+    .text{
+        display: inline-block;
+        margin: auto;
+    }
+    #app{
+        background-image: url(https://cdn2.ettoday.net/images/1885/1885373.jpg);
+        background-size: cover;
+    }
+    span:hover {
+        transition: 0.5s;
+        cursor: pointer;
+        background-color: #ccc;
+    }
+    button {
+        color: #000;
+    }
+    .bye{
+        display: none;
+    }
+</style>
+<body>
+    <div id="app">
+        <div class="text">
+            <div class="inin">
+                <input type="text" v-model="keyin" @keydown.enter="add" placeholder="Enter">
+                <button @click="add">新增代辦</button>
+            </div>
+            <ul class="seen">
+                <li v-for="(list,id) in lists" :key="id" :class="list.choose?'bye':''">
+                    <p>{{id+1}}.</p>
+                    <input type="checkbox" v-model="list.choose">{{list.name}}
+                    <span @click="del(id)">X</span>
+                </li>
+            </ul>
+            <button @click="allWant">我全都要</button>
+            <button @click="clear">全都不要ㄌ</button>
+            <div class="finish">完成區
+                <ul>
+                    <li v-for="(list,id) in donelists" :key="id">
+                        <input type="checkbox" v-model="list.choose">{{list.name}}</div>
+                    </li>
+                </ul>
+                <button @click="bang">完成的砍</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        let lists = [{choose: false,name: "test"},{choose: false,name: "123"},{choose: false,name: "456"}];
+        // let donelists = [];
+        Vue.createApp({
+            data(){
+                return{
+                    keyin:"",
+                    lists:lists,
+                    // donelists:donelists,
+                }
+            },
+            computed:{
+                donelists(){
+                    return this.lists.filter(i => i.choose)
+                },
+                lists(){
+                    return this.lists.filter(i => i.choose)
+                }
+            },
+            methods: {
+                add(){
+                    if(this.keyin != ""){
+                        this.lists.push({choose: false,name: this.keyin});
+                    }
+                    this.keyin="";
+                },
+                allWant(){
+                    this.lists = this.lists.map(item => {return{...item,choose: true}});
+                },
+                del(id){
+                    this.lists.splice(id,1);
+                },
+                clear(){
+                    this.lists = [];
+                },
+                bang(){
+                    this.lists = this.lists.filter(i => !i.choose)
+                }
+                
+            },
+        }).mount("#app");
+    </script>
+</body>
+</html>
