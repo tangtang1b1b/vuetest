@@ -11,6 +11,9 @@
         outline: solid 1px;
         color: #fff;
     }
+    .black{
+        color: #000;
+    }
     .text{
         display: inline-block;
         margin: auto;
@@ -35,11 +38,11 @@
     <div id="app">
         <div class="text">
             <div class="inin">
-                <input type="text" v-model="keyin" @keydown.enter="add" placeholder="Enter">
+                <input class="black" type="text" v-model="keyin" @keydown.enter="add" placeholder="Enter">
                 <button @click="add">新增代辦</button>
             </div>
             <ul class="seen">
-                <li v-for="(list,id) in lists" :key="id" :class="list.choose?'bye':''">
+                <li v-for="(list,id) in lists" :key="id">
                     <p>{{id+1}}.</p>
                     <input type="checkbox" v-model="list.choose">{{list.name}}
                     <span @click="del(id)">X</span>
